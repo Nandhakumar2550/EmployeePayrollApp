@@ -1,27 +1,34 @@
 package com.bridgelabz.EmployeePayrollApp.controller;
 
 import com.bridgelabz.EmployeePayrollApp.dto.EmployeePayrollDTO;
+import com.bridgelabz.EmployeePayrollApp.service.EmployeePayrollService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeePayrollController {
 
+    @Autowired
+    private EmployeePayrollService employeePayrollService;
+
     @GetMapping
     public String getEmployee() {
-        return "Get Employee Payroll Data";
+        return employeePayrollService.getEmployeeData();
     }
 
     @PostMapping
-    public String addEmployee(@RequestBody EmployeePayrollDTO dto) {
-        return "Added Employee : " + dto.getName() +
-                " Salary : " + dto.getSalary();
+    public EmployeePayrollDTO addEmployee(
+            @RequestBody EmployeePayrollDTO employeeDTO) {
+
+        return employeePayrollService.createEmployee(employeeDTO);
     }
 
     @PutMapping
-    public String updateEmployee(@RequestBody EmployeePayrollDTO dto) {
-        return "Updated Employee : " + dto.getName() +
-                " Salary : " + dto.getSalary();
+    public EmployeePayrollDTO updateEmployee(
+            @RequestBody EmployeePayrollDTO employeeDTO) {
+
+        return employeePayrollService.updateEmployee(employeeDTO);
     }
 
     @DeleteMapping("/{name}")
