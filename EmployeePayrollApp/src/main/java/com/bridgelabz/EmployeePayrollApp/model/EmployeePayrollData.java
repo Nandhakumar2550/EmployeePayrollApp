@@ -1,15 +1,24 @@
 package com.bridgelabz.EmployeePayrollApp.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class EmployeePayrollData {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
-    private long salary;
+    private double salary;
 
     public EmployeePayrollData() {
     }
 
-    public EmployeePayrollData(int id, String name, long salary) {
+    public EmployeePayrollData(int id, String name, double salary) {
         this.id = id;
         this.name = name;
         this.salary = salary;
@@ -31,11 +40,11 @@ public class EmployeePayrollData {
         this.name = name;
     }
 
-    public long getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(long salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 }
